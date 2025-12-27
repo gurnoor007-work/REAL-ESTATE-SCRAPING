@@ -93,7 +93,15 @@ async def main():
         async with Stealth().use_async(async_playwright()) as p:
             try:
                 #create a browser
-                browser = await p.chromium.launch(headless=False)
+                browser = await p.chromium.launch(
+                    headless=False,
+                    proxy={
+                        "server": "socks5://127.0.0.1:9050"
+                    },
+                    args=[
+                        "--disable-blink-features=AutomationControlled"
+                    ]
+                )
 
                 #Get a list of user_agents
                 ua = [
