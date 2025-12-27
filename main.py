@@ -81,7 +81,11 @@ async def propertry_handler(page: Page,
         new_tab = await popup_info.value
         await new_tab.wait_for_load_state("domcontentloaded")
         TABS.append(new_tab)
-    print(Fore.BLUE + TABS)
+    return TABS
+
+#make a function that extract all the information from a page
+async def info_extract(page: Page):
+    
 
 
 
@@ -94,13 +98,7 @@ async def main():
             try:
                 #create a browser
                 browser = await p.chromium.launch(
-                    headless=False,
-                    proxy={
-                        "server": "socks5://127.0.0.1:9050"
-                    },
-                    args=[
-                        "--disable-blink-features=AutomationControlled"
-                    ]
+                    headless=False
                 )
 
                 #Get a list of user_agents
